@@ -33,8 +33,10 @@ public class CommandResult {
         return Optional.ofNullable(relevantPersons);
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Returns the feedback message to user
+     */
+    public String getFeedbackToUser() {
         return feedbackToUser;
     }
 }
