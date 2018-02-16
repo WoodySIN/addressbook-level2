@@ -47,10 +47,17 @@ public class FindCommandTest {
      * the result matches the persons in the expectedPersonList exactly.
      */
     private void assertFindCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList) {
+        setArgumentToLowerCase(keywords);
         FindCommand command = createFindCommand(keywords);
         CommandResult result = command.execute();
 
         assertEquals(Command.getMessageForPersonListShownSummary(expectedPersonList), result.feedbackToUser);
+    }
+
+    private void setArgumentToLowerCase(String[] keywords) {
+        for (int i = 0; i < keywords.length; i++) {
+            keywords[i] = keywords[i].toLowerCase();
+        }
     }
 
     private FindCommand createFindCommand(String[] keywords) {
