@@ -37,21 +37,33 @@ public class UtilsTest {
     }
 
     @Test
-    public void isAnyNull() throws Exception {
-        // empty list
-        //assertAnyNull();
+    public void isAnyNull_nullList_returnTrue() throws Exception {
 
-        // all null
-        //assertAnyNull((Object) null);
-        //assertAnyNull((Object)null, (Object)null);
-        //assertAnyNull("", "");
-        //assertAnyNull("", null);
+        // list of null objects
+        assertAnyNull(null, null, null);
 
-        // some null
-        assertNotAnyNull("", "ab", "a");
-        assertNotAnyNull(1, 2, null);
+        // contains a null object
+        assertAnyNull(null, 12, 2);
+        assertAnyNull("ABC", "cd", null);
+        assertAnyNull(0, (Object) null, ",");
 
     }
+
+    @Test
+    public void isAnyNull_objectList_returnFalse() throws Exception {
+
+        //an empty object
+        assertNotAnyNull();
+
+        //only one object
+        assertNotAnyNull("tree");
+        assertNotAnyNull("");
+
+        //a list of concrete objects
+        assertNotAnyNull("A", 12, 2);
+
+    }
+
 
     private void assertAreUnique(Object... objects) {
         assertTrue(Utils.elementsAreUnique(Arrays.asList(objects)));
@@ -62,10 +74,10 @@ public class UtilsTest {
     }
 
     private void assertAnyNull(Object... objects) {
-        //assertTrue(Utils.isAnyNull(Arrays.asList(objects)));
+        assertTrue(Utils.isAnyNull(objects));
     }
 
     private void assertNotAnyNull(Object... objects) {
-        assertFalse(Utils.isAnyNull(Arrays.asList(objects)));
+        assertFalse(Utils.isAnyNull(objects));
     }
 }
